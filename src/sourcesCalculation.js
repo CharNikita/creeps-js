@@ -17,7 +17,11 @@ const sourcesCalculation = {
                     }
                 }
             }
-            console.log(`empty tiles around source ${source.id} = ${emptyTilesCount}`);
+
+            Memory.sources[source.id] = {
+                maxHarvesters: emptyTilesCount,
+                assignedCreepIds: [],
+            }
         }
     }
 };
