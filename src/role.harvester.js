@@ -18,6 +18,9 @@ const roleHarvester = {
                     return currentSource.assignedCreepIds.length < currentSource.maxHarvesters;
                 }
             });
+            if (target === null) {
+                return;
+            }
 
             const creepIds = new Set(Memory.sources[target.id].assignedCreepIds);
             if (!creepIds.has(creep.id)) {
