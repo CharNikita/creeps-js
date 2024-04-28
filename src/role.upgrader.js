@@ -1,7 +1,7 @@
 const roleUpgrader = {
     /** @param {Creep} creep **/
     run: function (creep) {
-        if (reep.memory.state === 'upgrading' && creep.store[RESOURCE_ENERGY] === 0) {
+        if (creep.memory.state === 'upgrading' && creep.store[RESOURCE_ENERGY] === 0) {
             creep.memory.state = 'withdrawing';
             creep.say('withdrawing');
         }
