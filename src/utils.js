@@ -1,1 +1,1 @@
-Game.spawns['spawn'].spawnCreep([WORK, CARRY, MOVE, MOVE, MOVE], `builder-${Game.time}`, {memory: {role: 'builder'}});
+Game.spawns['spawn'].spawnCreep([WORK, CARRY, MOVE, MOVE, MOVE], `harvester-${Game.time}`, {memory: {role: 'harvester'}});
