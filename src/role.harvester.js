@@ -44,9 +44,9 @@ const roleHarvester = {
         if (creep.memory.state === 'transferring') {
             const sourceId = creep.memory.sourceId;
             if (sourceId) {
-                const assignedCreepIds = new Set(Memory.sources[sourceId].assignedCreepIds);
-                assignedCreepIds.delete(creep.id)
-                Memory.sources[sourceId].assignedCreepIds = assignedCreepIds;
+                const creepIds = new Set(Memory.sources[sourceId].assignedCreepIds);
+                creepIds.delete(creep.id)
+                Memory.sources[sourceId].assignedCreepIds = [...creepIds];
             }
 
             const targets = creep.room.find(FIND_STRUCTURES, {
