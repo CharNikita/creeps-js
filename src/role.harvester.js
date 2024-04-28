@@ -12,12 +12,15 @@ const roleHarvester = {
         }
 
         if (creep.memory.state === 'harvesting') {
-            const target = creep.pos.findClosestByPath(FIND_SOURCES, {
-                filter: function (source) {
-                    const currentSource = Memory.sources[source.id];
-                    return currentSource.assignedCreepIds.length < currentSource.maxHarvesters;
-                }
-            });
+            let target = creep.memory.sourceId;
+            if (target === null) {
+                target = creep.pos.findClosestByPath(FIND_SOURCES, {
+                    filter: function (source) {
+                        const currentSource = Memory.sources[source.id];
+                        return currentSource.assignedCreepIds.length < currentSource.maxHarvesters;
+                    }
+                });
+            }
             if (target === null) {
                 return;
             }
