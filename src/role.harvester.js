@@ -12,8 +12,8 @@ const roleHarvester = {
         }
 
         if (creep.memory.state === 'harvesting') {
-            let target = creep.memory.sourceId;
-            if (target === undefined) {
+            let target = Game.getObjectById(creep.memory.sourceId);
+            if (!target) {
                 target = creep.pos.findClosestByPath(FIND_SOURCES, {
                     filter: function (source) {
                         const currentSource = Memory.sources[source.id];
@@ -47,6 +47,7 @@ const roleHarvester = {
                 const creepIds = new Set(Memory.sources[sourceId].assignedCreepIds);
                 creepIds.delete(creep.id)
                 Memory.sources[sourceId].assignedCreepIds = [...creepIds];
+                creep.memory.sourceId = null;
             }
 
             const targets = creep.room.find(FIND_STRUCTURES, {
