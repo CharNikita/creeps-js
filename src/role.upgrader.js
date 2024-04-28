@@ -6,7 +6,7 @@ const roleUpgrader = {
             creep.memory.state = 'withdrawing';
             creep.say('withdrawing');
         }
-        if (creep.store[RESOURCE_ENERGY] !== 0) {
+        if (creep.store.getFreeCapacity() === 0) {
             creep.memory.state = 'upgrading';
             creep.say('upgrading');
         }
