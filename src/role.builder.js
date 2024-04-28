@@ -1,12 +1,11 @@
 const roleBuilder = {
     /** @param {Creep} creep **/
     run: function (creep) {
-        creep.memory.state = 'idle'
-        if (creep.store[RESOURCE_ENERGY] === 0) {
+        if (creep.memory.state === 'building' && creep.store[RESOURCE_ENERGY] === 0) {
             creep.memory.state = 'withdrawing';
             creep.say('withdrawing');
         }
-        if (creep.store[RESOURCE_ENERGY] !== 0) {
+        if (creep.memory.state !== 'building' && creep.store.getFreeCapacity() === 0) {
             creep.memory.state = 'building';
             creep.say('building');
         }
