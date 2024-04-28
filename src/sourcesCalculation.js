@@ -1,4 +1,4 @@
-const sourceCalculation = {
+const sourcesCalculation = {
     calculate: function () {
         const room = Game.spawns['spawn'].room;
         const terrain = new Room.Terrain(room.name);
@@ -9,10 +9,10 @@ const sourceCalculation = {
             terrain.get(sourcePosition.x, sourcePosition.y);
 
             let emptyTilesCount = 0;
-            for (const xShift in [-1, 0, 1]) {
-                for (const yShift in [-1, 0, 1]) {
+            for (const xShift of [-1, 0, 1]) {
+                for (const yShift of [-1, 0, 1]) {
                     const tileType = terrain.get(sourcePosition.x + xShift, sourcePosition.y + yShift);
-                    if (tileType === 0) {
+                    if (tileType !== TERRAIN_MASK_WALL) {
                         emptyTilesCount += 1;
                     }
                 }
@@ -22,4 +22,4 @@ const sourceCalculation = {
     }
 };
 
-module.exports = sourceCalculation;
+module.exports = sourcesCalculation;
