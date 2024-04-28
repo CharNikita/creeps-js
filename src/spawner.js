@@ -19,12 +19,12 @@ const spawner = {
             spawnHarvester()
             return;
         }
-        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'builder').length < 1) {
-            spawnBuilder()
-            return;
-        }
         if (_.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader').length < 1) {
             spawnUpgrader()
+            return;
+        }
+        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'builder').length < 1) {
+            spawnBuilder()
             return;
         }
     }
