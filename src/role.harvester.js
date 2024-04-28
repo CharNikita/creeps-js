@@ -1,3 +1,13 @@
+const cleanUp = (creep) => {
+    const sourceId = creep.memory.sourceId;
+    if (sourceId) {
+        const creepIds = new Set(Memory.sources[sourceId].assignedCreepIds);
+        creepIds.delete(creep.id)
+        Memory.sources[sourceId].assignedCreepIds = [...creepIds];
+        creep.memory.sourceId = null;
+    }
+}
+
 const roleHarvester = {
     /** @param {Creep} creep **/
     run: function (creep) {
@@ -5,10 +15,12 @@ const roleHarvester = {
         if (creep.store.getFreeCapacity() > 0) {
             creep.memory.state = 'harvesting';
             creep.say('harvesting');
-        }
-        if (creep.store.getFreeCapacity() === 0) {
+        } else if (creep.store.getFreeCapacity() === 0) {
             creep.memory.state = 'transferring';
             creep.say('transferring');
+        } else if (creep.ticksToLive <= 1) {
+            creep.memory.state = 'die';
+            creep.say('die');
         }
 
         if (creep.memory.state === 'harvesting') {
@@ -42,13 +54,7 @@ const roleHarvester = {
             return;
         }
         if (creep.memory.state === 'transferring') {
-            const sourceId = creep.memory.sourceId;
-            if (sourceId) {
-                const creepIds = new Set(Memory.sources[sourceId].assignedCreepIds);
-                creepIds.delete(creep.id)
-                Memory.sources[sourceId].assignedCreepIds = [...creepIds];
-                creep.memory.sourceId = null;
-            }
+            cleanUp(creep);
 
             const targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
@@ -67,6 +73,9 @@ const roleHarvester = {
                 );
             }
             return;
+        }
+        if (creep.memory.state === 'die') {
+            cleanUp(creep);
         }
     }
 };
