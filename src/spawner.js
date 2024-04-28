@@ -1,11 +1,37 @@
 const spawnHarvester = () => {
-    Game.spawns['spawn'].spawnCreep([WORK, CARRY, CARRY, CARRY, MOVE], `harvester-${Game.time}`, {memory: {role: 'harvester'}});
+    Game.spawns['spawn'].spawnCreep(
+        [WORK, CARRY, CARRY, CARRY, MOVE],
+        `harvester-${Game.time}`,
+        {
+            memory: {
+                role: 'harvester',
+            }
+        }
+    );
 }
 const spawnBuilder = () => {
-    Game.spawns['spawn'].spawnCreep([WORK, CARRY, MOVE], `builder-${Game.time}`, {memory: {role: 'builder'}});
+    Game.spawns['spawn'].spawnCreep(
+        [WORK, CARRY, MOVE],
+        `builder-${Game.time}`,
+        {
+            memory: {
+                role: 'builder',
+                state: 'withdrawing',
+            }
+        }
+    );
 }
 const spawnUpgrader = () => {
-    Game.spawns['spawn'].spawnCreep([WORK, CARRY, MOVE], `upgrader-${Game.time}`, {memory: {role: 'upgrader'}});
+    Game.spawns['spawn'].spawnCreep(
+        [WORK, CARRY, MOVE],
+        `upgrader-${Game.time}`,
+        {
+            memory: {
+                role: 'upgrader',
+                state: 'withdrawing',
+            }
+        }
+    );
 }
 
 const spawner = {
