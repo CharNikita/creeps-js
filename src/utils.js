@@ -1,0 +1,1 @@
+Game.spawns['spawn'].spawnCreep([WORK, CARRY, MOVE, MOVE, MOVE], `builder-${Game.time}`, {memory: {role: 'builder'}});
