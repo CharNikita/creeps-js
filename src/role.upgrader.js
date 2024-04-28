@@ -24,8 +24,8 @@ const roleUpgrader = {
             return;
         }
         if (creep.memory.state === 'withdrawing') {
-            const sources = creep.room.find(FIND_MY_SPAWNS, RESOURCE_ENERGY);
-            const withdrawResult = creep.withdraw(sources[0]);
+            const sources = creep.room.find(FIND_MY_SPAWNS);
+            const withdrawResult = creep.withdraw(sources[0], RESOURCE_ENERGY);
             console.log(withdrawResult)
             if (withdrawResult === ERR_NOT_IN_RANGE) {
                 creep.moveTo(sources[0], {
