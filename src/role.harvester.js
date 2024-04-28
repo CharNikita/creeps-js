@@ -18,7 +18,11 @@ const roleHarvester = {
                     return currentSource.assignedCreepIds.length < currentSource.maxHarvesters;
                 }
             });
-            Memory.sources[target.id].assignedCreepIds.push(creep.id);
+
+            const creepIds = new Set(Memory.sources[target.id].assignedCreepIds);
+            if (!creepIds.has(creep.id)) {
+                Memory.sources[target.id].assignedCreepIds.push(creep.id);
+            }
             creep.memory.sourceId = target.id;
             const harvestResult = creep.harvest(target);
             if (harvestResult === ERR_NOT_IN_RANGE) {
@@ -32,8 +36,8 @@ const roleHarvester = {
             return;
         }
         if (creep.memory.state === 'transferring') {
-            const assignedCreepIds = Memory.sources[creep.memory.sourceId].assignedCreepIds;
-            assignedCreepIds.splice(assignedCreepIds.indexOf(creep.id), 1);
+            const assignedCreepIds = new Set(Memory.sources[creep.memory.sourceId].assignedCreepIds);
+            assignedCreepIds.delete(creep.id)
             Memory.sources[creep.memory.sourceId].assignedCreepIds = assignedCreepIds;
 
             const targets = creep.room.find(FIND_STRUCTURES, {
