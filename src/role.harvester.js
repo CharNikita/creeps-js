@@ -13,7 +13,7 @@ const roleHarvester = {
 
         if (creep.memory.state === 'harvesting') {
             let target = creep.memory.sourceId;
-            if (target === null) {
+            if (target === undefined) {
                 target = creep.pos.findClosestByPath(FIND_SOURCES, {
                     filter: function (source) {
                         const currentSource = Memory.sources[source.id];
@@ -42,9 +42,12 @@ const roleHarvester = {
             return;
         }
         if (creep.memory.state === 'transferring') {
-            const assignedCreepIds = new Set(Memory.sources[creep.memory.sourceId].assignedCreepIds);
-            assignedCreepIds.delete(creep.id)
-            Memory.sources[creep.memory.sourceId].assignedCreepIds = assignedCreepIds;
+            const sourceId = creep.memory.sourceId;
+            if (sourceId) {
+                const assignedCreepIds = new Set(Memory.sources[sourceId].assignedCreepIds);
+                assignedCreepIds.delete(creep.id)
+                Memory.sources[sourceId].assignedCreepIds = assignedCreepIds;
+            }
 
             const targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
