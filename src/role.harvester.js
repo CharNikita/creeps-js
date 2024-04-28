@@ -20,16 +20,16 @@ const roleHarvester = {
                         return currentSource.assignedCreepIds.length < currentSource.maxHarvesters;
                     }
                 });
-            }
-            if (target === null) {
-                return;
+                if (target === null) {
+                    return;
+                }
+                const creepIds = new Set(Memory.sources[target.id].assignedCreepIds);
+                if (!creepIds.has(creep.id)) {
+                    Memory.sources[target.id].assignedCreepIds.push(creep.id);
+                }
+                creep.memory.sourceId = target.id;
             }
 
-            const creepIds = new Set(Memory.sources[target.id].assignedCreepIds);
-            if (!creepIds.has(creep.id)) {
-                Memory.sources[target.id].assignedCreepIds.push(creep.id);
-            }
-            creep.memory.sourceId = target.id;
             const harvestResult = creep.harvest(target);
             if (harvestResult === ERR_NOT_IN_RANGE) {
                 creep.moveTo(target, {
