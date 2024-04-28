@@ -11,16 +11,15 @@ const cleanUp = (creep) => {
 const roleHarvester = {
     /** @param {Creep} creep **/
     run: function (creep) {
-        creep.memory.state = 'idle'
-        if (creep.store.getFreeCapacity() > 0) {
+        if (creep.ticksToLive <= 3) {
+            creep.memory.state = 'die';
+            creep.say('die');
+        } else if (creep.store.getFreeCapacity() > 0) {
             creep.memory.state = 'harvesting';
             creep.say('harvesting');
         } else if (creep.store.getFreeCapacity() === 0) {
             creep.memory.state = 'transferring';
             creep.say('transferring');
-        } else if (creep.ticksToLive <= 1) {
-            creep.memory.state = 'die';
-            creep.say('die');
         }
 
         if (creep.memory.state === 'harvesting') {
@@ -76,6 +75,7 @@ const roleHarvester = {
         }
         if (creep.memory.state === 'die') {
             cleanUp(creep);
+            return;
         }
     }
 };
