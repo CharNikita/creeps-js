@@ -12,10 +12,17 @@ const roleHarvester = {
         }
 
         if (creep.memory.state === 'harvesting') {
-            const sources = creep.room.find(FIND_SOURCES);
-            const harvestResult = creep.harvest(sources[0]);
+            const target = creep.pos.findClosestByPath(FIND_SOURCES, {
+                filter: function (source) {
+                    const currentSource = Memory.sources[source.id];
+                    return currentSource.assignedCreepIds.length < currentSource.maxHarvesters;
+                }
+            });
+            Memory.sources[target.id].assignedCreepIds.push(creep.id);
+            creep.memory.sourceId = target.id;
+            const harvestResult = creep.harvest(target);
             if (harvestResult === ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {
+                creep.moveTo(target, {
                         visualizePathStyle: {
                             stroke: '#ffffff'
                         }
@@ -25,6 +32,10 @@ const roleHarvester = {
             return;
         }
         if (creep.memory.state === 'transferring') {
+            const assignedCreepIds = Memory.sources[creep.memory.sourceId].assignedCreepIds;
+            assignedCreepIds.splice(assignedCreepIds.indexOf(creep.id), 1);
+            Memory.sources[creep.memory.sourceId].assignedCreepIds = assignedCreepIds;
+
             const targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType === STRUCTURE_EXTENSION
