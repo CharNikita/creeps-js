@@ -61,11 +61,11 @@ const spawner = {
             spawnCargo();
             return;
         }
-        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader').length < 2) {
+        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader').length < 3) {
             spawnUpgrader();
             return;
         }
-        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'builder').length < 2) {
+        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'builder').length < 1) {
             spawnBuilder();
             return;
         }
