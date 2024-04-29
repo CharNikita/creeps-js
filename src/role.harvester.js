@@ -55,17 +55,14 @@ const roleHarvester = {
         if (creep.memory.state === 'transferring') {
             cleanUp(creep);
 
-            const targets = creep.room.find(FIND_STRUCTURES, {
+            const targets = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType === STRUCTURE_EXTENSION
-                            || structure.structureType === STRUCTURE_SPAWN
-                            || structure.structureType === STRUCTURE_CONTAINER)
-                        && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                    return (structure.structureType === STRUCTURE_CONTAINER);
                 }
             });
-            const transferResult = creep.transfer(targets[0], RESOURCE_ENERGY);
+            const transferResult = creep.transfer(targets, RESOURCE_ENERGY);
             if (transferResult === ERR_NOT_IN_RANGE) {
-                creep.moveTo(targets[0], {
+                creep.moveTo(targets, {
                         visualizePathStyle: {
                             stroke: '#ffaa00'
                         }
