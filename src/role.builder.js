@@ -34,7 +34,7 @@ const roleBuilder = {
                 filter: (structure) => {
                     return (structure.structureType === STRUCTURE_SPAWN
                             || structure.structureType === STRUCTURE_CONTAINER)
-                        && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                        && structure.store[RESOURCE_ENERGY] > 0;
                 }
             });
             const withdrawResult = creep.withdraw(withdrawTargets[0], RESOURCE_ENERGY);
