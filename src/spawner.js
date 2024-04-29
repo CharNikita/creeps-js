@@ -53,7 +53,7 @@ const spawner = {
         if (spawn.spawning != null) {
             return
         }
-        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'harvester').length < 5) {
+        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'harvester').length < 4) {
             spawnHarvester();
             return;
         }
