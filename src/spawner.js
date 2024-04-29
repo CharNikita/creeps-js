@@ -33,6 +33,18 @@ const spawnUpgrader = () => {
         }
     );
 }
+const spawnCargo = () => {
+    Game.spawns['spawn'].spawnCreep(
+        [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
+        `cargo-${Game.time}`,
+        {
+            memory: {
+                role: 'cargo',
+                state: 'withdrawing',
+            }
+        }
+    );
+}
 
 const spawner = {
     spawn: function () {
@@ -42,15 +54,19 @@ const spawner = {
             return
         }
         if (_.filter(Game.creeps, (creep) => creep.memory.role === 'harvester').length < 5) {
-            spawnHarvester()
+            spawnHarvester();
+            return;
+        }
+        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'cargo').length < 1) {
+            spawnCargo();
             return;
         }
         if (_.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader').length < 2) {
-            spawnUpgrader()
+            spawnUpgrader();
             return;
         }
         if (_.filter(Game.creeps, (creep) => creep.memory.role === 'builder').length < 2) {
-            spawnBuilder()
+            spawnBuilder();
             return;
         }
     }
