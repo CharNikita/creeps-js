@@ -1,6 +1,6 @@
 const spawnHarvester = () => {
     Game.spawns['spawn'].spawnCreep(
-        [WORK, CARRY, CARRY, CARRY, MOVE],
+        [WORK, WORK, WORK, CARRY, MOVE],
         `harvester-${Game.time}`,
         {
             memory: {
@@ -23,7 +23,7 @@ const spawnBuilder = () => {
 }
 const spawnUpgrader = () => {
     Game.spawns['spawn'].spawnCreep(
-        [WORK, WORK, WORK, CARRY, MOVE],
+        [WORK, WORK, WORK, WORK, CARRY, MOVE],
         `upgrader-${Game.time}`,
         {
             memory: {
