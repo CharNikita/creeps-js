@@ -15,7 +15,8 @@ const roleCargo = {
                 filter: (structure) => {
                     return (structure.structureType === STRUCTURE_SPAWN
                             || structure.structureType === STRUCTURE_EXTENSION
-                            || structure.structureType === STRUCTURE_TOWER)
+                            || structure.structureType === STRUCTURE_TOWER
+                            || (structure.structureType === STRUCTURE_CONTAINER && Memory.containers[structure.id].type !== 'source'))
                         && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                 }
             });
@@ -31,14 +32,14 @@ const roleCargo = {
         if (creep.memory.state === 'withdrawing') {
             const withdrawTargets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType === STRUCTURE_CONTAINER)
+                    return (structure.structureType === STRUCTURE_CONTAINER && Memory.containers[structure.id].type === 'source')
                         && structure.store[RESOURCE_ENERGY] > 0;
                 }
             });
             if (withdrawTargets.length === 0) {
                 return;
             }
-            withdrawTargets.sort((a,b) => b.store[RESOURCE_ENERGY] - a.store[RESOURCE_ENERGY]);
+            withdrawTargets.sort((a, b) => b.store[RESOURCE_ENERGY] - a.store[RESOURCE_ENERGY]);
             const withdrawResult = creep.withdraw(withdrawTargets[0], RESOURCE_ENERGY);
             if (withdrawResult === ERR_NOT_IN_RANGE) {
                 creep.moveTo(withdrawTargets[0], {
