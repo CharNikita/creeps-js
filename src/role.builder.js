@@ -28,7 +28,7 @@ const roleBuilder = {
         if (creep.memory.state === 'withdrawing') {
             const withdrawTarget = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType === STRUCTURE_CONTAINER)// && Memory.containers[structure.id].type !== 'source')
+                    return (structure.structureType === STRUCTURE_CONTAINER && !Memory.containers[structure.id])
                         && structure.store[RESOURCE_ENERGY] > 0;
                 }
             });

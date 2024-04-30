@@ -11,15 +11,21 @@ const roleCargo = {
         }
 
         if (creep.memory.state === 'transfer') {
-            const transferTargets = creep.room.find(FIND_STRUCTURES, {
+            let transferTargets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType === STRUCTURE_SPAWN
                             || structure.structureType === STRUCTURE_EXTENSION
-                            || structure.structureType === STRUCTURE_TOWER
-                            || (structure.structureType === STRUCTURE_CONTAINER && Memory.containers[structure.id].type !== 'source'))
+                            || structure.structureType === STRUCTURE_TOWER)
                         && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                 }
             });
+            if (transferTargets.length === 0) {
+                transferTargets = creep.room.find(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType === STRUCTURE_CONTAINER && !Memory.containers[structure.id]) && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                    }
+                });
+            }
             if (transferTargets.length === 0) {
                 return;
             }
@@ -32,7 +38,7 @@ const roleCargo = {
         if (creep.memory.state === 'withdrawing') {
             const withdrawTargets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType === STRUCTURE_CONTAINER && Memory.containers[structure.id].type === 'source')
+                    return (structure.structureType === STRUCTURE_CONTAINER && Memory.containers[structure.id])
                         && structure.store[RESOURCE_ENERGY] > 0;
                 }
             });
