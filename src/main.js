@@ -31,7 +31,7 @@ module.exports.loop = function () {
     }
 
     const tower = Game.getObjectById('6630377fd7c86e3ba8aeabcf');
-    const targets = creep.room.find(FIND_STRUCTURES, {
+    const targets = tower.room.find(FIND_STRUCTURES, {
         filter: object => (object.structureType !== STRUCTURE_WALL) && (object.hits < object.hitsMax)
     });
 
