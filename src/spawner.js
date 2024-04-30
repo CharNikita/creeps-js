@@ -35,7 +35,7 @@ const spawnUpgrader = () => {
 }
 const spawnCargo = () => {
     Game.spawns['spawn'].spawnCreep(
-        [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE], // 550
+        [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], // 800
         `cargo-${Game.time}`,
         {
             memory: {
