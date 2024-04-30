@@ -57,11 +57,11 @@ const spawner = {
             spawnHarvester();
             return;
         }
-        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'cargo').length < 1) {
+        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'cargo').length < 2) {
             spawnCargo();
             return;
         }
-        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader').length < 3) {
+        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader').length < 6) {
             spawnUpgrader();
             return;
         }

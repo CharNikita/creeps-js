@@ -36,7 +36,7 @@ const roleCargo = {
             if (withdrawTargets.length === 0) {
                 return;
             }
-
+            withdrawTargets.sort((a,b) => b.store[RESOURCE_ENERGY] - a.store[RESOURCE_ENERGY]);
             const withdrawResult = creep.withdraw(withdrawTargets[0], RESOURCE_ENERGY);
             if (withdrawResult === ERR_NOT_IN_RANGE) {
                 creep.moveTo(withdrawTargets[0], {

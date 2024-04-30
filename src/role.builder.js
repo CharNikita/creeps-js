@@ -32,8 +32,7 @@ const roleBuilder = {
         if (creep.memory.state === 'withdrawing') {
             const withdrawTargets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType === STRUCTURE_SPAWN
-                            || structure.structureType === STRUCTURE_CONTAINER)
+                    return (structure.structureType === STRUCTURE_SPAWN)
                         && structure.store[RESOURCE_ENERGY] > 0;
                 }
             });
