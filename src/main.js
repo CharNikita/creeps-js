@@ -1,8 +1,9 @@
-var roleHarvester = require('role.harvester');
-var roleUpgrader = require('role.upgrader');
-var roleBuilder = require('role.builder');
-var roleCargo = require('role.cargo');
-var spawner = require('spawner');
+require('Creep');
+const roleHarvester = require('role.harvester');
+const roleUpgrader = require('role.upgrader');
+const roleBuilder = require('role.builder');
+const roleCargo = require('role.cargo');
+const spawner = require('spawner');
 
 module.exports.loop = function () {
     for (const name in Memory.creeps) {
