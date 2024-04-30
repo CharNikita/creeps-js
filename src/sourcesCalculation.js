@@ -23,6 +23,17 @@ const sourcesCalculation = {
                 assignedCreepIds: [],
             }
         }
+    },
+    init: function () {
+        const room = Game.spawns['spawn'].room;
+        const terrain = new Room.Terrain(room.name);
+        const sources = room.find(FIND_SOURCES);
+
+        for (const source of sources) {
+            Memory.sources[source.id] = {
+                assignedCreepId: null,
+            }
+        }
     }
 };
 

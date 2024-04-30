@@ -1,9 +1,7 @@
 const cleanUp = (creep) => {
     const sourceId = creep.memory.sourceId;
     if (sourceId) {
-        const creepIds = new Set(Memory.sources[sourceId].assignedCreepIds);
-        creepIds.delete(creep.id)
-        Memory.sources[sourceId].assignedCreepIds = [...creepIds];
+        Memory.sources[sourceId].assignedCreepId = null;
         creep.memory.sourceId = null;
     }
 }
@@ -27,17 +25,13 @@ const roleHarvester = {
             if (!target) {
                 target = creep.pos.findClosestByPath(FIND_SOURCES, {
                     filter: function (source) {
-                        const currentSource = Memory.sources[source.id];
-                        return currentSource.assignedCreepIds.length < currentSource.maxHarvesters;
+                        return Memory.sources[source.id].assignedCreepId == null;
                     }
                 });
                 if (target === null) {
                     return;
                 }
-                const creepIds = new Set(Memory.sources[target.id].assignedCreepIds);
-                if (!creepIds.has(creep.id)) {
-                    Memory.sources[target.id].assignedCreepIds.push(creep.id);
-                }
+                Memory.sources[target.id].assignedCreepId = creep.id;
                 creep.memory.sourceId = target.id;
             }
 

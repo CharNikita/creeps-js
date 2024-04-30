@@ -1,6 +1,6 @@
 const spawnHarvester = () => {
     Game.spawns['spawn'].spawnCreep(
-        [WORK, WORK, WORK, CARRY, MOVE],
+        [WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, MOVE], // 800
         `harvester-${Game.time}`,
         {
             memory: {
@@ -53,7 +53,7 @@ const spawner = {
         if (spawn.spawning != null) {
             return
         }
-        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'harvester').length < 4) {
+        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'harvester').length < 2) {
             spawnHarvester();
             return;
         }
