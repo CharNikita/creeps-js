@@ -28,7 +28,7 @@
         let status = original.apply(this, arguments);
         if (typeof status === "number" && status < 0) {
             console.log(
-                `Creep ${this.name} action ${method} failed with status ${status} at ${this.pos}`
+                `${this.name} ${method} failed with ${status} at ${this.pos}`
             );
         }
         return status;
