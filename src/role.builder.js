@@ -26,15 +26,15 @@ const roleBuilder = {
             return;
         }
         if (creep.memory.state === 'withdrawing') {
-            const withdrawTargets = creep.room.find(FIND_STRUCTURES, {
+            const withdrawTarget = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType === STRUCTURE_SPAWN)
+                    return (structure.structureType === STRUCTURE_CONTAINER)// && Memory.containers[structure.id].type !== 'source')
                         && structure.store[RESOURCE_ENERGY] > 0;
                 }
             });
-            const withdrawResult = creep.withdraw(withdrawTargets[0], RESOURCE_ENERGY);
+            const withdrawResult = creep.withdraw(withdrawTarget, RESOURCE_ENERGY);
             if (withdrawResult === ERR_NOT_IN_RANGE) {
-                creep.moveTo(withdrawTargets[0], {
+                creep.moveTo(withdrawTarget, {
                         visualizePathStyle: {
                             stroke: '#ffaa00'
                         }

@@ -23,10 +23,15 @@ const roleUpgrader = {
             return;
         }
         if (creep.memory.state === 'withdrawing') {
-            const sources = creep.room.find(FIND_MY_SPAWNS);
-            const withdrawResult = creep.withdraw(sources[0], RESOURCE_ENERGY);
+            const withdrawTarget = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (structure.structureType === STRUCTURE_CONTAINER)// && Memory.containers[structure.id].type !== 'source')
+                        && structure.store[RESOURCE_ENERGY] > 0;
+                }
+            });
+            const withdrawResult = creep.withdraw(withdrawTarget, RESOURCE_ENERGY);
             if (withdrawResult === ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {
+                creep.moveTo(withdrawTarget, {
                         visualizePathStyle: {
                             stroke: '#ffaa00'
                         }
