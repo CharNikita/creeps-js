@@ -6,6 +6,8 @@ const roleCargo = require('role.cargo');
 const spawner = require('spawner');
 
 module.exports.loop = function () {
+    console.log(`TICK ${Game.time} STARTED`);
+
     for (const name in Memory.creeps) {
         if (!Game.creeps[name]) {
             delete Memory.creeps[name];
@@ -39,4 +41,6 @@ module.exports.loop = function () {
     if (targets.length > 0) {
         tower.repair(targets[0]);
     }
+
+    console.log(`TICK ${Game.time} ENDED`);
 }
