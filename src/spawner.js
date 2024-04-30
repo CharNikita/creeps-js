@@ -65,7 +65,7 @@ const spawner = {
             spawnUpgrader();
             return;
         }
-        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'builder').length < 3) {
+        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'builder').length < 2) {
             spawnBuilder();
             return;
         }
