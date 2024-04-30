@@ -11,7 +11,7 @@ const spawnHarvester = () => {
 }
 const spawnBuilder = () => {
     Game.spawns['spawn'].spawnCreep(
-        [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE],
+        [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE], // 500
         `builder-${Game.time}`,
         {
             memory: {
@@ -23,7 +23,7 @@ const spawnBuilder = () => {
 }
 const spawnUpgrader = () => {
     Game.spawns['spawn'].spawnCreep(
-        [WORK, WORK, WORK, WORK, CARRY, MOVE],
+        [WORK, WORK, WORK, WORK, CARRY, MOVE], // 500
         `upgrader-${Game.time}`,
         {
             memory: {
@@ -35,7 +35,7 @@ const spawnUpgrader = () => {
 }
 const spawnCargo = () => {
     Game.spawns['spawn'].spawnCreep(
-        [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
+        [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE], // 550
         `cargo-${Game.time}`,
         {
             memory: {
