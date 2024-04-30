@@ -42,7 +42,7 @@ const roleHarvester = {
         }
     },
     /** @param {Creep} creep **/
-    _withdraw: (creep) => {
+    _withdraw: function (creep) {
         let target = this._getTargetToWithdraw(creep);
         if (!target) {
             return;
@@ -59,7 +59,7 @@ const roleHarvester = {
         }
     },
     /** @param {Creep} creep **/
-    _getTargetToWithdraw: (creep) => {
+    _getTargetToWithdraw: function (creep) {
         return creep.pos.findClosestByPath(FIND_SOURCES, {
             filter: function (source) {
                 return Memory.sources[source.id].assignedCreepId == null;
@@ -67,7 +67,7 @@ const roleHarvester = {
         });
     },
     /** @param {Creep} creep **/
-    _cleanUp: (creep) => {
+    _cleanUp: function (creep) {
         const sourceId = creep.memory.sourceId;
         if (!sourceId) {
             return;
