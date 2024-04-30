@@ -27,9 +27,7 @@
     Creep.prototype[method] = function () {
         let status = original.apply(this, arguments);
         if (typeof status === "number" && status < 0) {
-            console.log(
-                `${this.name} ${method} failed with ${status} at ${this.pos}`
-            );
+            console.log(`${this.name} ${method} failed with ${status} at ${this.pos}`);
         }
         return status;
     };
