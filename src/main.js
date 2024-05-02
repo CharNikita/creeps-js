@@ -4,6 +4,7 @@ const roleUpgrader = require('role.upgrader');
 const roleBuilder = require('role.builder');
 const roleCargo = require('role.cargo');
 const spawner = require('spawner');
+const tower = require('tower');
 
 module.exports.loop = function () {
     console.log(`TICK ${Game.time} STARTED`);
@@ -33,14 +34,7 @@ module.exports.loop = function () {
         }
     }
 
-    const tower = Game.getObjectById('6630377fd7c86e3ba8aeabcf');
-    const targets = tower.room.find(FIND_STRUCTURES, {
-        filter: object => (object.structureType !== STRUCTURE_WALL) && (object.hits < object.hitsMax)
-    });
-
-    if (targets.length > 0) {
-        tower.repair(targets[0]);
-    }
+    tower.run();
 
     console.log(`TICK ${Game.time} ENDED`);
 }

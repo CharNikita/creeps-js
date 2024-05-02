@@ -61,7 +61,7 @@ const spawner = {
             spawnCargo();
             return;
         }
-        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader').length < 6) {
+        if (_.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader').length < 3) {
             spawnUpgrader();
             return;
         }
