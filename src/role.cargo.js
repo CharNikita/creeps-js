@@ -11,13 +11,13 @@ const roleCargo = {
         }
 
         if (creep.memory.state === 'transfer') {
-            let transferTargets = creep.room.find(FIND_STRUCTURES, {
+            let transferTargets = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return structure.structureType === STRUCTURE_TOWER && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 100;
                 }
             });
-            if (transferTargets.length === 0) {
-                transferTargets = creep.room.find(FIND_STRUCTURES, {
+            if (!transferTargets) {
+                transferTargets = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType === STRUCTURE_SPAWN
                                 || structure.structureType === STRUCTURE_EXTENSION)
@@ -25,14 +25,14 @@ const roleCargo = {
                     }
                 });
             }
-            if (transferTargets.length === 0) {
-                transferTargets = creep.room.find(FIND_STRUCTURES, {
+            if (!transferTargets) {
+                transferTargets = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType === STRUCTURE_CONTAINER && !Memory.containers[structure.id]) && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                     }
                 });
             }
-            if (transferTargets.length === 0) {
+            if (!transferTargets) {
                 return;
             }
             const transferResult = creep.transfer(transferTargets[0], RESOURCE_ENERGY);
