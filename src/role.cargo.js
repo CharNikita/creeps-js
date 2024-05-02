@@ -35,9 +35,9 @@ const roleCargo = {
             if (!transferTargets) {
                 return;
             }
-            const transferResult = creep.transfer(transferTargets[0], RESOURCE_ENERGY);
+            const transferResult = creep.transfer(transferTargets, RESOURCE_ENERGY);
             if (transferResult === ERR_NOT_IN_RANGE) {
-                creep.moveTo(transferTargets[0]);
+                creep.moveTo(transferTargets);
             }
             return;
         }
